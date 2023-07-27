@@ -2,19 +2,19 @@ import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
 
 export const list = query({
-  args: {},
-  handler: async (ctx) => {
-    // Grab the most recent messages.
-    const messages = await ctx.db.query("messages").order("desc").take(100);
+	args: {},
+	handler: async (ctx) => {
+		// Grab the most recent messages.
+		const messages = await ctx.db.query("messages").order("asc").take(100);
 
-    return messages;
-  },
+		return messages;
+	},
 });
 
 export const send = mutation({
-  args: { body: v.string(), author: v.string() },
-  handler: async (ctx, { body, author }) => {
-    // Send a new message.
-    await ctx.db.insert("messages", { body, author });
-  },
+	args: { body: v.string(), author: v.string() },
+	handler: async (ctx, { body, author }) => {
+		// Send a new message.
+		await ctx.db.insert("messages", { body, author });
+	},
 });
