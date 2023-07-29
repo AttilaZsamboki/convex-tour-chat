@@ -65,13 +65,13 @@ export default function App() {
 										: "rounded-bl-none bg-white text-black justify-self-start"
 								} rounded-[16px] p-[20px] my-[0.5em] mx-0 shadow-md overflow-ellipsis leading-[1.4] max-w-lg whitespace-pre-line relative`}>
 								{message.body}
-								{isHoveredMessage.id === message._id || message.likes.length > 0 ? (
-									isHoveredMessage.isHovered || message.likes.length > 0 ? (
+								{isHoveredMessage.id === message._id || message.likes?.length > 0 ? (
+									isHoveredMessage.isHovered || message.likes?.length > 0 ? (
 										<div
 											className='bg-gray-400 p-[1px] px-[3px] rounded-lg max-h-[28px] absolute -bottom-2 -right-2 cursor-pointer'
 											onClick={() => likeMessage({ liker: NAME, messageId: message._id })}>
 											<span className='text-gray-200 text-md font-semibold'>
-												{message.likes.length}
+												{message.likes?.length}
 											</span>
 											<button>🤍</button>
 										</div>
