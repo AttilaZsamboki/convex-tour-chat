@@ -18,3 +18,14 @@ export const send = mutation({
 		await ctx.db.insert("messages", { body, author });
 	},
 });
+
+export const clearMessages = mutation({
+	args: {},
+	handler: async (ctx) => {
+		// Clear all messages.
+		const messages = await ctx.db.query("messages").collect();
+		messages.forEach(async (message) => {
+			await ctx.db.delete(message._id);
+		});
+	},
+});
