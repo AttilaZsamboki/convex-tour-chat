@@ -25,6 +25,17 @@ export const send = mutation({
 	handler: async (ctx, { body, author }) => {
 		// Send a new message.
 		await ctx.db.insert("messages", { body, author });
+		const messages = await ctx.db
+			.query("messages")
+			.order("desc")
+			.filter((q) => q.neq(q.field("body"), undefined))
+			.take(21);
+		messages.reverse();
+		const botMessageId = await ctx.db.insert("messages", {
+			author: "assistant",
+			body: "",
+		});
+		return { messages, botMessageId };
 	},
 });
 
